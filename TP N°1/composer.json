@@ -1,0 +1,12 @@
+{
+    "name": "rodrigo/tp1",
+    "authors": [
+        {
+            "name": "Rodrigo Disconsi",
+            "email": "rodrigodisconsi@gmail.com"
+        }
+    ],
+    "require": {
+        "namnv609/php-rest-countries": "^1.0"
+    }
+}
