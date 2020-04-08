@@ -16,21 +16,21 @@ class Pais extends Api implements IMostrar{
 
     public function __construct($nombre){
         parent::__construct();
-        $this->inicializar($nombre);
+        $this->nombre = $nombre;
+        $this->inicializar();
     }
 
-    private function inicializar($nombre){
+    private function inicializar(){
         // $var = $this->getByName($nombre);
-        $var = parent::getByName($nombre);
-        $this->nombre = $var[0]->name;
-        $this->capital = $var[0]->capital;
-        $this->continente = $var[0]->region;
-        $this->subRegion = $var[0]->subregion;
-        $this->poblacion = $var[0]->population;
-        $this->idioma = $var[0]->languages[0]->nativeName;
-        $this->area = $var[0]->area;
-        $this->bandera = $var[0]->flag;
-        $this->moneda = $var[0]->currencies[0]->name;
+        $var = parent::getByName($this->nombre);
+        $this->capital = $var->capital;
+        $this->continente = $var->region;
+        $this->subRegion = $var->subregion;
+        $this->poblacion = $var->population;
+        $this->idioma = $var->languages[0]->nativeName;
+        $this->area = $var->area;
+        $this->bandera = $var->flag;
+        $this->moneda = $var->currencies[0]->name;
     }
 
     public function mostrar(){
@@ -46,9 +46,9 @@ class Pais extends Api implements IMostrar{
         return $this->nombre;
     }
 
-    private function ordenarDatos(){
+    public function ordenarDatos(){
         $retorno = strtoupper($this);
-        $retorno = $retorno."              ".$this->mostrarBandera();
+        $retorno = $retorno.$this->mostrarBandera();
         $retorno = $retorno."<br>";
         $retorno = $retorno."----------------------------------";
         $retorno = $retorno."<br>";

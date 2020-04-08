@@ -3,7 +3,7 @@ include_once 'api.php';
 include_once 'pais.php';
 include_once 'mostrarInterfaz.php';
 
-class Continente extends Api implements mostrarInterfaz{
+class Continente extends Api implements IMostrar{
 
     public $nombre;
     public $paises;
@@ -15,8 +15,8 @@ class Continente extends Api implements mostrarInterfaz{
         $this->setPaises($nombre);
     }
 
-    public function setPaises($nombreContinente){
-        if(strtolower($nombreContinente) == "america"){
+    public function setPaises(){
+        if(strtolower($this->nombre) == "america"){
             $nombreContinente = "americas";
         }
         $continente = $this->getbyContinent($nombreContinente);
@@ -25,13 +25,25 @@ class Continente extends Api implements mostrarInterfaz{
         }
     }
 
+    public function mostrar(){
+        echo $this->ordenarDatos();
+    }
+
     public function __toString(){
         return $this->nombre;
     }
 
-    private function ordenarDatos(){
-        $retorno = strtoupper($this->nombre);
-        $retorno = $retorno;
+    public function ordenarDatos(){
+        $retorno = strtoupper($this->nombre).":";
+        $retorno = $retorno."<br>";
+        $retorno = $retorno."----------------------------------------------------------------------------------";
+        $retorno = $retorno."<br>";
+        foreach($this->paises as $pais){
+            $retorno = $retorno."".$pais->ordenarDatos();
+        }
+        $retorno = $retorno."<br>";
+        $retorno = $retorno."----------------------------------------------------------------------------------";
+        return $retorno;
     }
 
     

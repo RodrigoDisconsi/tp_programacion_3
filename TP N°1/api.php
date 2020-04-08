@@ -4,8 +4,7 @@ use NNV\RestCountries;
 class Api{
     
     // private static $restCountries = new Restcountries; No me dejaba hacer esto, no entiendo porque.
-
-    private static $instance = null;
+    // private static $instance = null;
     private $restCountries;
 
 
@@ -25,8 +24,17 @@ class Api{
         return $this->restCountries->all();
     }
 
+    // protected function getByName($nombre, $isEnglishName){
+    //     return $this->restCountries->byName($nombre);
+    // }
+
     protected function getByName($nombre){
-        return $this->restCountries->byName($nombre);
+        $aux = $this->getAll();
+        foreach($aux as $valor){
+            if(strtolower($valor->translations->es) == strtolower($nombre) || strtolower($valor->name) == strtolower($nombre)){
+                return $valor;
+            }
+        }
     }
 
     protected function getByCapital($nombreCapital){

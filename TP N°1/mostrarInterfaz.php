@@ -6,4 +6,5 @@ interface IMostrar
 
     public function __toString();
 
+    public function ordenarDatos();
 }
